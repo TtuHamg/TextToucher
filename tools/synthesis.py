@@ -3,6 +3,10 @@ import torch
 import os
 import json
 import sys
+from pathlib import Path
+
+current_file_path = Path(__file__).resolve()
+sys.path.insert(0, str(current_file_path.parent.parent))
 
 torch.backends.cuda.matmul.allow_tf32 = True
 torch.backends.cudnn.allow_tf32 = True

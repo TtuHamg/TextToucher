@@ -200,6 +200,7 @@ def synthesis_dataset(
     cfg_scale=4.5,
     seed=43,
     bg_idx='',
+    steps=50,
 ):
     torch.random.manual_seed(seed)
     os.umask(0o000)
@@ -233,7 +234,7 @@ def synthesis_dataset(
         [[image_size, image_size]], dtype=torch.float, device=device
     ).repeat(batch_size, 1)
     ar = torch.tensor([[1.0]], device=device).repeat(batch_size, 1)
-    sample_steps_dict = {"iddpm": 100, "dpm-solver": 20, "sa-solver": 25}
+    sample_steps_dict = {"iddpm": steps, "dpm-solver": steps, "sa-solver": steps}
     sample_steps = sample_steps_dict[sampling_algo]
 
     model.eval()

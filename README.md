@@ -55,20 +55,23 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 torchrun --nnodes=1 --nproc_per_node=4 --master-por
     tools/train.py --config configs/TextToucher_img512_HCT.py
 ```
 
+The models trained on the HCT and SSVTP datasets are now publicly available on [Google Drive](https://drive.google.com/drive/folders/1207ia6VuSRlrQAVSoH3P5XJFSK7Kk8UK?usp=sharing). You can replace the `model_path` with the download path in the following. In addition, we provide the HCT evaluation data on [Google Drive](https://drive.google.com/drive/folders/1RR5rIFlRKIeXHLQnso77Z62NnAJ32TZl?usp=sharing), which can be used for direct synthesis without the need for retraining.
+
+
 ## Synthesis
 ```bash
 python ./tools/synthesis.py  \
---model_path '/TextToucher_path/results/hct/checkpoints/model.pth' \
---vae_path '/TextToucher_path//pretrained_model/sd-vae-ft-ema' \
---save_dir '/TextToucher_path/results/hct/samples/dpm50_seed43_cfg4.5' \
---device 'cuda:0' --vae_device 'cuda:0' \
---eval_prompts 'hct_eval/prompt_embed.ckpt' \
---gt_dir 'hct_eval/tactile/' \
---sampling_algo 'dpm-solver' \
---bg_idx  'hct_eval/bg_idx.ckpt' \ # the gel status idx
---batch_size 25 \
---config '/TextToucher_path/configs/TextToucher_img512_HCT.py' \
---seed 43  --cfg 4.5  --steps 50 
+    --model_path '/TextToucher_path/results/hct/checkpoints/model.pth' \
+    --vae_path '/TextToucher_path/pretrained_model/sd-vae-ft-ema' \
+    --save_dir '/TextToucher_path/results/hct/samples/dpm50_seed43_cfg4.5' \
+    --device 'cuda:0' --vae_device 'cuda:0' \
+    --eval_prompts 'hct_eval/prompt' \
+    --gt_dir 'hct_eval/tactile' \
+    --sampling_algo 'dpm-solver' \
+    --bg_idx  'hct_eval/bg_idx.ckpt' \ # the gel status idx
+    --batch_size 25 \
+    --config '/TextToucher_path/configs/TextToucher_img512_HCT.py' \
+    --seed 43  --cfg 4.5  --steps 50 
 ```
 
 ## Evaluation
@@ -99,10 +102,13 @@ Many thanks to its contributors!
 ## Citation
 If you find our work helpful for your research, please consider citing our work.
 ```bibtex
-@article{tu2024texttoucher,
+@inproceedings{tu2025texttoucher,
   title={Texttoucher: Fine-grained text-to-touch generation},
   author={Tu, Jiahang and Fu, Hao and Yang, Fengyu and Zhao, Hanbin and Zhang, Chao and Qian, Hui},
-  journal={arXiv preprint arXiv:2409.05427},
-  year={2024}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={39},
+  number={7},
+  pages={7455--7463},
+  year={2025}
 }
 ```

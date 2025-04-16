@@ -188,11 +188,7 @@ class TextToucher(nn.Module):
         self.final_layer = T2IFinalLayer(hidden_size, patch_size, self.out_channels)
         self.initialize_weights()
 
-        if config:
-            logger = get_root_logger(os.path.join(config.work_dir, 'train_log.log'))
-            logger.warning(f"lewei scale: {self.lewei_scale}, base size: {self.base_size}")
-        else:
-            print(f'Warning: lewei scale: {self.lewei_scale}, base size: {self.base_size}')
+        print(f'Warning: lewei scale: {self.lewei_scale}, base size: {self.base_size}')
         
         self.bg_embed = None
         if config and config.bg_embed > 0:

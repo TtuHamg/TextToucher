@@ -5,6 +5,9 @@ calcuate metrics code are based on
 """
 
 import sys
+from pathlib import Path
+current_file_path = Path(__file__).resolve()
+sys.path.insert(0, str(current_file_path.parent.parent))
 import os
 import json
 import pathlib
