@@ -26,7 +26,7 @@
 
 You can use the following command to install the environment.
 ```bash
-conda create -n TextToucher python=3.10
+conda create -n TextToucher python=3.9.18
 conda activate TextToucher
 pip install -r requirements.txt
 ```
